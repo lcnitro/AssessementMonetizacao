@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "603114623636",
+    "firebase_url": "https://assessementmonetizacao.firebaseio.com",
+    "project_id": "assessementmonetizacao",
+    "storage_bucket": "assessementmonetizacao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603114623636:android:1dee98a55e039886",
+        "android_client_info": {
+          "package_name": "infnet.edu.br.assessementmonetizacao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603114623636-ebaukgbo46br9t7j81u0k8t5b79ikk9s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "infnet.edu.br.assessementmonetizacao",
+            "certificate_hash": "62b1b930f5ca3f1312c19467620852229c21b70d"
+          }
+        },
+        {
+          "client_id": "603114623636-8fgu8ee0dfq67ihca9aqs9taoi6rf249.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD21DCakuk69pxYYMYPRE9FBgQRHoGz7sw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603114623636-8fgu8ee0dfq67ihca9aqs9taoi6rf249.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
