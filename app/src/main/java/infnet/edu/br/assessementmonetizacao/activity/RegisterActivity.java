@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.regex.Matcher;
@@ -32,6 +33,7 @@ import java.util.regex.Pattern;
 
 import infnet.edu.br.assessementmonetizacao.R;
 import infnet.edu.br.assessementmonetizacao.config.FirebaseConfiguration;
+import infnet.edu.br.assessementmonetizacao.helper.SaveOrOpenTextFile;
 import infnet.edu.br.assessementmonetizacao.model.Usuario;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -45,8 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Usuario usuario;
 
     private FirebaseAuth firebaseAuth;
-
-    private static final String FILE_NAME = "anotations.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +104,14 @@ public class RegisterActivity extends AppCompatActivity {
                             usuario.setEmail(email);
                             usuario.setPassword(pass);
                             usuario.setCPF(cpfWithoutFormater);
+
+                            // saving text
+                            SaveOrOpenTextFile saveOrOpenTextFile = new SaveOrOpenTextFile();
+                            saveOrOpenTextFile.saveTxt(usuario.getName(),
+                                                        usuario.getEmail(),
+                                                        usuario.getPassword(),
+                                                        usuario.getCPF(),
+                                                        getApplicationContext());
 
                             hideSoftKeyboard(RegisterActivity.this);
 
@@ -182,6 +190,7 @@ public class RegisterActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
     public static boolean isPassMaches(String pass, String confirm_pass) {
         if (pass.equals(confirm_pass)) {
             return true;
@@ -199,21 +208,4 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
-
-//    private void saveTxt(String nome) {
-//
-//        try {
-//
-//            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("anotacao.txt", Context.MODE_PRIVATE));
-//
-//            outputStreamWriter.write(nome);
-////            outputStreamWriter.write(usuario.getEmail());
-////            outputStreamWriter.write(usuario.getPassword());
-////            outputStreamWriter.write(usuario.getCPF());
-//            outputStreamWriter.close();
-//
-//        } catch (IOException e) {
-//            Log.i("Erro ", e.toString());
-//        }
-//    }
 }

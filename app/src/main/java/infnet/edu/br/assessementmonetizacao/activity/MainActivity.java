@@ -3,28 +3,26 @@ package infnet.edu.br.assessementmonetizacao.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import infnet.edu.br.assessementmonetizacao.R;
+import infnet.edu.br.assessementmonetizacao.helper.SaveOrOpenTextFile;
 
 public class MainActivity extends AppCompatActivity {
 
     private InterstitialAd interstitialAd;
     private Button btn_open_ad;
     private Button btn_back;
+    private Button btn_delete_txt;
     private Boolean ad_closed;
+    private TextView saved_txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         btn_open_ad = findViewById(R.id.btn_open_ad);
         btn_back = findViewById(R.id.btn_back);
+        saved_txt = findViewById(R.id.saved_text);
+        btn_delete_txt = findViewById(R.id.btn_delete_txt);
 
         interstitialAd.setAdListener(new AdListener() {
             @Override
@@ -87,11 +87,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-                finish();
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(intent);
+            finish();
             }
         }); // End btn_back
+
+        // opening saved text
+        final SaveOrOpenTextFile saveOrOpenTextFile = new SaveOrOpenTextFile();
+        saved_txt.setText(saveOrOpenTextFile.openTxt(getApplicationContext()));
+
+        btn_delete_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SaveOrOpenTextFile saveOrOpenTextFile1 = new SaveOrOpenTextFile();
+                saveOrOpenTextFile.deleteTxt(getApplicationContext());
+                saveOrOpenTextFile.openTxt(getApplicationContext());
+            }
+        }); // End btn_delete_txt
 
     } // End onCreate
 
@@ -100,30 +113,4 @@ public class MainActivity extends AppCompatActivity {
             interstitialAd.show();
         }
     }
-
-//    private String openTxt() {
-//        String result = "";
-//        try {
-//
-//            InputStream inputStream = openFileInput(FILE_NAME);
-//            if (inputStream != null) {
-//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//
-//                // generate buffer
-//                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//
-//                // recover data
-//                String lineFile = "";
-//                while ((lineFile = bufferedReader.readLine()) != null) {
-//                    result += lineFile;
-//                }
-//                inputStream.close();
-//            }
-//
-//        } catch (IOException e) {
-//            Log.i("Erro ao ler txt", e.toString());
-//        }
-//
-//        return result;
-//    }
 }
